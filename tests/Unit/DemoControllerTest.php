@@ -23,5 +23,7 @@ class DemoControllerTest extends CRUDControllerTestcase
         $this->factory = DemoModelFactory::new();
         $this->model = DemoModel::class;
         $this->formRequest = app(DemoStore::class);
+        // $this->formRequest = DemoStore::class;
+        $this->createdObjectType = 'DemoModel';
     }
 }

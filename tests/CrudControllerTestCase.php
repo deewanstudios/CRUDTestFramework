@@ -17,6 +17,8 @@ class CRUDControllerTestcase extends BaseTestCase
     protected $controller;
     protected $formRequest;
 
+    protected $createdObjectType;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -30,6 +32,15 @@ class CRUDControllerTestcase extends BaseTestCase
     public function testCreateMethod()
     {
         $data = $this->validModelData();
+
+        $formRequest = $this->formRequest;
+
+        // dump($formRequest);
+        $request = $formRequest->request->replace($data);
+        // dd($request);
+        // $request->setMethod('POST');
+        $request->headers->set('Content-Type', 'application/json');
+        // dump($data);
         $serviceMock = Mockery::mock($this->service);
         $serviceMock->shouldReceive('store')
             ->once()
@@ -38,10 +49,8 @@ class CRUDControllerTestcase extends BaseTestCase
 
         $modelMock = new $this->model;
         $controller = new $this->controller($this->service);
-        // $formRequest = new $this->formRequest;
 
-        dump($data);
-        $response = $controller->create($this->formRequest, $data);
+        $response = $controller->create($request, $this->createdObjectType);
 
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertEquals(201, $response->getStatusCode());

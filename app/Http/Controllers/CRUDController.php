@@ -17,6 +17,7 @@ class CRUDController extends Controller
 
     public function create(FormRequest $request, $objectType)
     {
+        dump($request);
         $data = $this->service->store($request->validated());
     }
 }
