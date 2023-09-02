@@ -9,9 +9,9 @@ use App\Services\DemoService;
 use Database\Factories\DemoModelFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\CRUDControllerTestcase;
+use Tests\CRUDControllerTestCase;
 
-class DemoControllerTest extends CRUDControllerTestcase
+class DemoControllerTest extends CRUDControllerTestCase
 {
     use RefreshDatabase, WithFaker;
 
